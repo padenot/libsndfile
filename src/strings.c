@@ -29,7 +29,7 @@
 
 int
 psf_store_string (SF_PRIVATE *psf, int str_type, const char *str)
-{	char	new_str [128] ;
+{	char	new_str [4096] ;
 	size_t	str_len ;
 	int		k, str_flags ;
 
@@ -129,7 +129,7 @@ psf_store_string (SF_PRIVATE *psf, int str_type, const char *str)
 	{	char * temp = psf->strings.storage ;
 		size_t newlen = 2 * psf->strings.storage_len + str_len + 1 ;
 
-		newlen = newlen < 256 ? 256 : newlen ;
+		newlen = newlen < 8192 ? 8192 : newlen ;
 
 		if ((psf->strings.storage = realloc (temp, newlen)) == NULL)
 		{	psf->strings.storage = temp ;
